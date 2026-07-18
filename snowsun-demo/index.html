@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNOWSUN — Premium Art Materials | Acrylic Paint, Varnish, Texture Paste</title>
+<meta name="description" content="SNOWSUN professional art materials manufacturer. Premium acrylic paint, matte & gloss varnish, texture paste. Wholesale & bulk supply available. US Amazon bestseller.">
+<style>
+:root {
+  --snow: #f8f4f0;
+  --snow-dark: #e8e0d8;
+  --navy: #1a2a3a;
+  --navy-light: #2a4a6a;
+  --gold: #c8a87c;
+  --gold-light: #e8d5b8;
+  --text: #2c3e50;
+  --text-light: #7f8c8d;
+  --white: #ffffff;
+  --shadow: 0 2px 20px rgba(0,0,0,.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--snow);color:var(--text);line-height:1.7}
+
+/* ─── Navigation ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,42,58,.95);backdrop-filter:blur(12px);padding:0 24px;transition:all .3s}
+nav.scrolled{background:rgba(26,42,58,.98);box-shadow:0 2px 20px rgba(0,0,0,.2)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:1.2em;font-weight:800;color:var(--white);letter-spacing:2px}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85em;font-weight:500;transition:color .2s;letter-spacing:.5px}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{padding:8px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:6px;font-size:.8em;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--gold-light)}
+.menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5em;cursor:pointer}
+
+/* ─── Hero ─── */
+.hero{min-height:100vh;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 50%,#1a3a5a 100%);display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-30%;width:80%;height:200%;background:radial-gradient(ellipse at center,rgba(200,168,124,.08) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--snow),transparent)}
+.hero-inner{max-width:1200px;margin:0 auto;padding:120px 24px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-text h1{font-size:3.2em;font-weight:800;color:var(--white);line-height:1.15;margin-bottom:16px}
+.hero-text h1 span{color:var(--gold)}
+.hero-text p{font-size:1.1em;color:rgba(255,255,255,.7);max-width:520px;margin-bottom:32px;line-height:1.8}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{padding:14px 32px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:.95em;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-secondary{padding:14px 32px;background:rgba(255,255,255,.1);color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:8px;font-size:.95em;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-secondary:hover{background:rgba(255,255,255,.15);border-color:var(--gold);color:var(--gold)}
+
+.hero-visual{display:flex;justify-content:center;align-items:center}
+.hero-products{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:420px}
+.prod-card-hero{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px 16px;text-align:center;backdrop-filter:blur(8px);transition:all .3s}
+.prod-card-hero:hover{background:rgba(255,255,255,.1);transform:translateY(-4px);border-color:var(--gold)}
+.prod-card-hero .icon{font-size:2.4em;margin-bottom:6px}
+.prod-card-hero .name{color:var(--white);font-weight:600;font-size:.9em}
+.prod-card-hero .desc{color:rgba(255,255,255,.5);font-size:.75em;margin-top:2px}
+
+/* ─── Section Common ─── */
+section{padding:80px 24px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:48px}
+.section-title h2{font-size:2em;font-weight:800;color:var(--navy);margin-bottom:8px}
+.section-title h2 span{color:var(--gold)}
+.section-title p{color:var(--text-light);max-width:540px;margin:0 auto;font-size:.95em}
+
+/* ─── Products ─── */
+#products{background:var(--white)}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.product-card{background:var(--snow);border-radius:16px;padding:28px 24px;border:1px solid var(--snow-dark);transition:all .3s}
+.product-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);border-color:var(--gold)}
+.product-card .img-wrap{width:100%;height:200px;overflow:hidden;border-radius:10px;margin-bottom:14px;background:var(--snow-dark);display:flex;align-items:center;justify-content:center}
+.product-card .img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform .4s}
+.product-card:hover .img-wrap img{transform:scale(1.05)}
+.product-card h3{font-size:1.15em;font-weight:700;margin-bottom:6px;color:var(--navy)}
+.product-card .desc{font-size:.85em;color:var(--text-light);margin-bottom:12px;line-height:1.6}
+.product-card .features{list-style:none;font-size:.8em}
+.product-card .features li{padding:3px 0;color:var(--text);display:flex;align-items:center;gap:6px}
+.product-card .features li::before{content:'✓';color:var(--gold);font-weight:700}
+.product-card .amazon-link{display:inline-block;margin-top:14px;padding:8px 18px;background:var(--navy);color:#fff;border-radius:6px;font-size:.8em;font-weight:600;text-decoration:none;transition:background .2s}
+.product-card .amazon-link:hover{background:var(--gold);color:var(--navy)}
+
+/* ─── About ─── */
+#about{background:var(--snow)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about-text h3{font-size:1.4em;font-weight:700;margin-bottom:16px;color:var(--navy)}
+.about-text p{font-size:.95em;color:var(--text-light);margin-bottom:12px;line-height:1.8}
+.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.stat-box{background:var(--white);border-radius:12px;padding:20px;text-align:center;box-shadow:var(--shadow)}
+.stat-box .num{font-size:1.8em;font-weight:800;color:var(--gold)}
+.stat-box .label{font-size:.8em;color:var(--text-light);margin-top:4px}
+
+/* ─── Contact / Wholesale ─── */
+#contact{background:var(--navy);color:var(--white)}
+#contact .section-title h2{color:var(--white)}
+#contact .section-title p{color:rgba(255,255,255,.6)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-info h3{font-size:1.2em;margin-bottom:16px;color:var(--gold)}
+.contact-info p{font-size:.9em;color:rgba(255,255,255,.7);margin-bottom:8px;line-height:1.8}
+.contact-info .item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.contact-info .item .ico{font-size:1.2em}
+
+.contact-form{background:rgba(255,255,255,.06);border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,.1)}
+.contact-form .field{margin-bottom:14px}
+.contact-form .field label{display:block;font-size:.8em;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:4px}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:10px 14px;border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:.9em;background:rgba(255,255,255,.08);color:var(--white);font-family:inherit}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(255,255,255,.3)}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--gold)}
+.contact-form textarea{resize:vertical;min-height:80px}
+.contact-form .submit{padding:12px 28px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:.95em;font-weight:700;cursor:pointer;width:100%;transition:background .2s}
+.contact-form .submit:hover{background:var(--gold-light)}
+.contact-form .note{font-size:.75em;color:rgba(255,255,255,.4);margin-top:8px;text-align:center}
+
+/* ─── Amazon Banner ─── */
+.amazon-banner{background:linear-gradient(135deg,#232f3e,#131921);padding:40px 24px;text-align:center}
+.amazon-banner h3{color:#fff;font-size:1.2em;margin-bottom:8px}
+.amazon-banner p{color:#999;font-size:.9em;margin-bottom:16px}
+.amazon-banner a{padding:12px 28px;background:#ff9900;color:#232f3e;border-radius:6px;font-weight:700;text-decoration:none;display:inline-block;transition:background .2s}
+.amazon-banner a:hover{background:#ffb84d}
+
+/* ─── Footer ─── */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);padding:32px 24px;text-align:center}
+footer p{color:rgba(255,255,255,.4);font-size:.8em;margin-bottom:4px}
+footer .links{display:flex;justify-content:center;gap:20px;margin-top:10px;flex-wrap:wrap}
+footer .links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.8em;transition:color .2s}
+footer .links a:hover{color:var(--gold)}
+
+/* ─── Toast ─── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:10px;font-size:.85em;z-index:200;display:none;white-space:nowrap}
+.toast.show{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ─── Responsive ─── */
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-text h1{font-size:2em}
+  .hero-text p{margin:0 auto 28px}
+  .hero-btns{justify-content:center}
+  .hero-products{max-width:300px;margin:0 auto}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--navy);flex-direction:column;padding:16px 24px;gap:12px;border-top:1px solid rgba(255,255,255,.1)}
+  .nav-links.show{display:flex}
+  .menu-toggle{display:block}
+  .nav-cta{display:none}
+  .section-title h2{font-size:1.5em}
+  .product-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+  .hero-text h1{font-size:1.6em}
+  section{padding:48px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">SNOW<span>SUN</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Wholesale</a></li>
+      <li><a href="https://www.amazon.com/s?me=A29LNLEU21NGOA&marketplaceID=ATVPDKIKX0DER" target="_blank" style="color:var(--gold)">Amazon Store →</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get Quote</a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Premium Art Materials <span>for Creators</span></h1>
+      <p>SNOWSUN brings professional-grade acrylic paint, varnish, and texture paste to artists worldwide. Made for those who demand the best — now available for wholesale.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">Explore Products →</a>
+        <a href="https://www.amazon.com/s?me=A29LNLEU21NGOA&marketplaceID=ATVPDKIKX0DER" target="_blank" class="btn-secondary">Shop on Amazon</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-products">
+        <div class="prod-card-hero"><div class="icon">🎨</div><div class="name">Acrylic Paint</div><div class="desc">12 vibrant colors</div></div>
+        <div class="prod-card-hero"><div class="icon">✨</div><div class="name">Matte Varnish</div><div class="desc">Ultra-matte finish</div></div>
+        <div class="prod-card-hero"><div class="icon">💎</div><div class="name">Gloss Varnish</div><div class="desc">High-gloss seal</div></div>
+        <div class="prod-card-hero"><div class="icon">🏔️</div><div class="name">Texture Paste</div><div class="desc">3D impasto effect</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>Our <span>Products</span></h2>
+      <p>Professional-grade art materials trusted by artists and educators. Available in bulk for wholesalers and distributors.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/61tQ4cPtGmL._AC_SX569_.jpg" alt="SNOWSUN Acrylic Paint 12 Colors" loading="lazy"></div>
+        <h3>Acrylic Paint Set</h3>
+        <div class="desc">Professional-grade acrylic paint in 12 rich, highly pigmented colors. Smooth consistency ideal for canvas, wood, paper, and mixed media.</div>
+        <ul class="features">
+          <li>12 vibrant colors in one set</li>
+          <li>High pigment load — vivid coverage</li>
+          <li>Fast-drying, water-based formula</li>
+          <li>Lightfast & archival quality</li>
+          <li>Perfect for artists, students, hobbyists</li>
+        </ul>
+        <a class="amazon-link" href="https://www.amazon.com/dp/B0F2FBR1YP" target="_blank">View on Amazon →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/61zhC4EQzyL._AC_SX569_.jpg" alt="SNOWSUN Matte Varnish" loading="lazy"></div>
+        <h3>Matte Varnish</h3>
+        <div class="desc">Ultra-matte finish varnish that protects your artwork without unwanted shine. Ideal for acrylic and oil paintings needing a flat, professional look.</div>
+        <ul class="features">
+          <li>Ultra-matte, non-reflective finish</li>
+          <li>UV-resistant protection</li>
+          <li>Self-leveling, brush-mark free</li>
+          <li>Removable with mineral spirits</li>
+          <li>For acrylic & oil paintings</li>
+        </ul>
+        <a class="amazon-link" href="https://www.amazon.com/dp/B0F246DR2J" target="_blank">View on Amazon →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/61RHoB68lmL._AC_SX569_.jpg" alt="SNOWSUN Gloss Varnish" loading="lazy"></div>
+        <h3>Gloss Varnish</h3>
+        <div class="desc">High-gloss varnish that delivers a brilliant, glass-like finish while providing durable, long-lasting protection for your artwork.</div>
+        <ul class="features">
+          <li>High-gloss, glass-like finish</li>
+          <li>Enhances color depth & vibrancy</li>
+          <li>UV protection against fading</li>
+          <li>Durable, scratch-resistant layer</li>
+          <li>Ideal for final sealing</li>
+        </ul>
+        <a class="amazon-link" href="https://www.amazon.com/dp/B0FXV1VLML" target="_blank">View on Amazon →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/71FXiCvRVFL._AC_SX569_.jpg" alt="SNOWSUN Texture Paste" loading="lazy"></div>
+        <h3>Texture Paste</h3>
+        <div class="desc">Create stunning 3D impasto effects with this thick, moldable texture paste. Perfect for abstract art, mixed media, and dimensional painting.</div>
+        <ul class="features">
+          <li>Thick, sculptable consistency</li>
+          <li>Creates 3D impasto effects</li>
+          <li>Accepts acrylic paint tinting</li>
+          <li>Dries to durable, crack-resistant finish</li>
+          <li>For canvas, wood, panels, crafts</li>
+        </ul>
+        <a class="amazon-link" href="https://www.amazon.com/dp/B0FY39BVGV" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About / Why SNOWSUN -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>Why <span>SNOWSUN</span></h2>
+      <p>We believe every artist deserves premium materials at fair prices. Our commitment to quality drives everything we do.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Quality Art Materials for Every Creator</h3>
+        <p>SNOWSUN was founded with a simple mission: make professional-grade art materials accessible to every artist, whether you're a seasoned professional, an enthusiastic hobbyist, or a student discovering your creative voice.</p>
+        <p>Our products are formulated with premium pigments and binders to deliver exceptional color payoff, smooth application, and long-lasting results. Every batch is tested to ensure consistent quality.</p>
+        <p>🌸 <strong>Available on Amazon US</strong> — fast shipping, easy returns, trusted by thousands of artists.</p>
+        <a href="https://www.amazon.com/s?me=A29LNLEU21NGOA&marketplaceID=ATVPDKIKX0DER" target="_blank" class="btn-primary" style="margin-top:16px;display:inline-flex">Visit Amazon Store →</a>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box"><div class="num">4</div><div class="label">Product Lines</div></div>
+        <div class="stat-box"><div class="num">12</div><div class="label">Acrylic Colors</div></div>
+        <div class="stat-box"><div class="num">100%</div><div class="label">Quality Tested</div></div>
+        <div class="stat-box"><div class="num">📦</div><div class="label">Bulk Available</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Amazon Store Banner -->
+<div class="amazon-banner">
+  <h3>🛒 Shop on Amazon.com</h3>
+  <p>Fast & free shipping with Amazon Prime. Easy returns. Buy with confidence.</p>
+  <a href="https://www.amazon.com/s?me=A29LNLEU21NGOA&marketplaceID=ATVPDKIKX0DER" target="_blank">Visit SNOWSUN Amazon Store →</a>
+</div>
+
+<!-- Contact / Wholesale -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>Wholesale & <span>Partnerships</span></h2>
+      <p>Interested in carrying SNOWSUN products in your store? We offer competitive wholesale pricing for art supply retailers, distributors, and educational institutions.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>📦 Get in Touch</h3>
+        <p>We're looking for distributors and retailers worldwide. Let's grow together.</p>
+        <div class="item"><span class="ico">📧</span> 28960559@qq.com</div>
+        <div class="item"><span class="ico">🌐</span> Amazon Store: SNOWSUN</div>
+        <div class="item"><span class="ico">🎯</span> US · Canada · UK · AU · EU</div>
+        <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,.06);border-radius:10px;border-left:3px solid var(--gold)">
+          <strong style="color:var(--gold)">Wholesale Minimum:</strong>
+          <p style="font-size:.85em;color:rgba(255,255,255,.6);margin-top:4px">500+ units per SKU. Custom colors & private label available for established partners.</p>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <div class="field">
+          <label>Your Name / Company *</label>
+          <input type="text" id="formName" placeholder="e.g. Art Supply Co." required>
+        </div>
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" id="formEmail" placeholder="you@company.com" required>
+        </div>
+        <div class="field">
+          <label>I'm a...</label>
+          <select id="formType">
+            <option value="distributor">Distributor / Wholesaler</option>
+            <option value="retailer">Art Supply Retailer</option>
+            <option value="school">School / Educational Institution</option>
+            <option value="artist">Individual Artist (Bulk)</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea id="formMsg" placeholder="Tell us about your needs — estimated volume, target market, any special requirements..."></textarea>
+        </div>
+        <button type="submit" class="submit" id="formBtn">📨 Send Inquiry →</button>
+        <div class="note">We typically respond within 24 hours. Your information is kept confidential.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 SNOWSUN. All rights reserved.</p>
+  <p style="font-size:.75em;margin-top:4px">Premium Art Materials for Every Creator</p>
+  <div class="links">
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Wholesale</a>
+    <a href="https://www.amazon.com/s?me=A29LNLEU21NGOA&marketplaceID=ATVPDKIKX0DER" target="_blank">Amazon Store</a>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── Nav Scroll ───
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── Mobile Menu ───
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('show');
+}
+
+// ─── Form Submit ───
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formBtn');
+  btn.textContent = '⏳ Sending...';
+  btn.disabled = true;
+
+  const data = {
+    _subject: 'Wholesale Inquiry - SNOWSUN',
+    name: document.getElementById('formName').value,
+    email: document.getElementById('formEmail').value,
+    type: document.getElementById('formType').value,
+    message: document.getElementById('formMsg').value,
+    source: 'SNOWSUN Brand Site'
+  };
+
+  try {
+    await fetch('https://formsubmit.co/ajax/28960559@qq.com', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    toast('✅ Inquiry sent! We\'ll respond within 24 hours.');
+    this.reset();
+  } catch(e) {
+    toast('❌ Failed to send. Please email us directly at 28960559@qq.com');
+  }
+
+  btn.textContent = '📨 Send Inquiry →';
+  btn.disabled = false;
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('show'));
+});
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
