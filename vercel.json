@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/ollama", "destination": "/ollama-checker/index.html" },
+    { "source": "/ollama/", "destination": "/ollama-checker/index.html" },
+    { "source": "/markitdown", "destination": "/markitdown-converter/index.html" },
+    { "source": "/markitdown/", "destination": "/markitdown-converter/index.html" },
+    { "source": "/frp", "destination": "/frp-checker/index.html" },
+    { "source": "/frp/", "destination": "/frp-checker/index.html" }
+  ]
+}

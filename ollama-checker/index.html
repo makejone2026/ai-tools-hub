@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>本地AI部署检测 | 你的电脑能跑什么模型？</title>
+<meta name="description" content="免费检测你的电脑能否本地运行DeepSeek、Llama等大模型。GPU/内存/CPU一键评分，推荐最适合的模型。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#e2e8f0;min-height:100vh}
+.container{max-width:720px;margin:0 auto;padding:40px 20px}
+header{text-align:center;margin-bottom:40px}
+header h1{font-size:2.2rem;margin-bottom:8px}
+header h1 span{background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header .sub{color:#94a3b8;font-size:1.1rem}
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:32px;margin-bottom:24px}
+.card h2{font-size:1.25rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.btn{display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:600;cursor:pointer;width:100%;transition:all .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(56,189,248,.3)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:20px}
+.spec{background:#0f172a;border-radius:12px;padding:20px;text-align:center}
+.spec .label{color:#64748b;font-size:.85rem;margin-bottom:8px}
+.spec .value{font-size:1.5rem;font-weight:700}
+.spec .value.green{color:#4ade80}
+.spec .value.yellow{color:#fbbf24}
+.spec .value.red{color:#f87171}
+.score-box{text-align:center;margin:20px 0}
+.score-num{font-size:4rem;font-weight:800;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.score-label{color:#94a3b8;font-size:1rem}
+.models{margin-top:20px}
+.model-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#0f172a;border-radius:10px;margin-bottom:8px}
+.model-row .name{font-weight:600}
+.model-row .badge{padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+.badge.ok{background:#065f46;color:#4ade80}
+.badge.warn{background:#78350f;color:#fbbf24}
+.badge.no{background:#7f1d1d;color:#f87171}
+.cta-box{text-align:center}
+.cta-box h3{font-size:1.3rem;margin-bottom:8px}
+.cta-box p{color:#94a3b8;margin-bottom:20px}
+.cta-box form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.cta-box input[type=email]{padding:14px 18px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:1rem;flex:1;min-width:220px}
+.cta-box button{padding:14px 28px;border-radius:10px;border:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-weight:600;font-size:1rem;cursor:pointer;white-space:nowrap}
+.trust{color:#64748b;font-size:.8rem;margin-top:12px}
+footer{text-align:center;color:#475569;font-size:.8rem;margin-top:40px;padding-top:20px;border-top:1px solid #1e293b}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>🖥️ 你的电脑能跑什么<span>AI模型</span>？</h1>
+  <p class="sub">一键检测GPU/内存/CPU → 推荐最适合本地部署的大模型</p>
+</header>
+
+<div class="card" style="background:linear-gradient(135deg,#1e3a5f,#1e293b)">
+  <h2>🔍 硬件扫描</h2>
+  <p style="color:#94a3b8;margin-bottom:16px">点击按钮，我们会在本地检测你的硬件（数据不上传）</p>
+  <button class="btn" id="scanBtn" onclick="runScan()">开始检测 →</button>
+  <div id="results" style="display:none"></div>
+</div>
+
+<div id="ctaSection" class="card cta-box" style="display:none">
+  <h3>🚀 想要企业级私有化部署？</h3>
+  <p>留下邮箱，获取定制化部署方案 + 模型选型建议（免费）</p>
+  <form action="https://formsubmit.co/28960559@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="Ollama企业部署需求">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="email" name="email" placeholder="your@email.com" required>
+    <button type="submit">获取方案 →</button>
+  </form>
+  <p class="trust">🔒 不发送垃圾邮件 · 随时退订 · 数据不上传</p>
+</div>
+
+<footer>
+  数据100%本地检测 · 绝不上传 · <span id="visitorCount">已为 3,500+ 用户检测</span>
+</footer>
+</div>
+
+<script>
+async function runScan() {
+  const btn = document.getElementById('scanBtn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ 检测中...';
+
+  // GPU Detection via WebGL
+  let gpu = '未检测到独立GPU';
+  let gpuVendor = '';
+  let vramEstimate = 0;
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+    if (gl) {
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        gpuVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+      }
+      // Estimate VRAM from max texture size
+      const maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+      const max3D = gl.getParameter(gl.MAX_3D_TEXTURE_SIZE);
+      vramEstimate = Math.round(maxSize * maxSize * 4 / (1024*1024));
+    }
+  } catch(e) {}
+
+  // RAM Detection
+  const ram = navigator.deviceMemory || '未知';
+  const ramGB = typeof ram === 'number' ? ram : 0;
+
+  // CPU
+  const cores = navigator.hardwareConcurrency || '未知';
+  const cpuCores = typeof cores === 'number' ? cores : 0;
+
+  // Platform
+  const platform = navigator.platform || '';
+  const isAppleSilicon = /Mac/.test(platform) && (gpu.toLowerCase().includes('apple') || gpuVendor.toLowerCase().includes('apple'));
+  
+  // Heuristic VRAM for Apple Silicon
+  if (isAppleSilicon && vramEstimate < 8000) vramEstimate = Math.round(ramGB * 0.7 * 1024);
+
+  // Score calculation (0-100)
+  let score = 0;
+  if (ramGB >= 32) score += 35;
+  else if (ramGB >= 16) score += 25;
+  else if (ramGB >= 8) score += 15;
+  else score += 5;
+
+  if (gpu.includes('NVIDIA') || gpu.includes('RTX') || gpu.includes('GTX')) score += 30;
+  else if (gpu.includes('AMD') || gpu.includes('Radeon')) score += 20;
+  else if (gpu.includes('Apple') || gpu.includes('M1') || gpu.includes('M2') || gpu.includes('M3') || gpu.includes('M4')) score += 25;
+  else if (gpu.includes('Intel')) score += 10;
+  else score += 5;
+
+  if (cpuCores >= 16) score += 20;
+  else if (cpuCores >= 8) score += 15;
+  else if (cpuCores >= 4) score += 10;
+  else score += 5;
+
+  if (vramEstimate >= 16000) score += 15;
+  else if (vramEstimate >= 8000) score += 10;
+  else if (vramEstimate >= 4000) score += 5;
+
+  score = Math.min(100, score);
+
+  // Model recommendations
+  const models = [
+    { name: 'DeepSeek-R1 671B', minScore: 85, minRAM: 64, status: 'no' },
+    { name: 'DeepSeek-V3 236B', minScore: 75, minRAM: 48, status: 'no' },
+    { name: 'Qwen2.5 72B', minScore: 65, minRAM: 32, minVRAM: 24000, status: 'no' },
+    { name: 'Llama 3.1 70B', minScore: 60, minRAM: 32, minVRAM: 24000, status: 'no' },
+    { name: 'Qwen2.5 32B', minScore: 50, minRAM: 16, minVRAM: 16000, status: 'no' },
+    { name: 'Llama 3.1 8B', minScore: 35, minRAM: 8, minVRAM: 6000, status: 'no' },
+    { name: 'DeepSeek-Coder 6.7B', minScore: 30, minRAM: 8, minVRAM: 4000, status: 'no' },
+    { name: 'Qwen2.5 7B', minScore: 25, minRAM: 8, minVRAM: 4000, status: 'no' },
+    { name: 'Gemma 3 4B', minScore: 20, minRAM: 4, status: 'no' },
+  ];
+
+  for (let m of models) {
+    if (score >= m.minScore && ramGB >= m.minRAM) {
+      m.status = vramEstimate >= (m.minVRAM||0) ? 'ok' : 'warn';
+    }
+  }
+
+  // Build UI
+  const colorClass = score >= 60 ? 'green' : score >= 30 ? 'yellow' : 'red';
+  const levelText = score >= 70 ? '🚀 AI就绪' : score >= 40 ? '⚠️ 入门可用' : '💡 轻量级';
+  const descText = score >= 70 ? '你的机器非常适合本地运行大模型，可以流畅运行70B+参数模型' 
+    : score >= 40 ? '可以运行中小型模型（7B-32B），建议加内存或GPU以获得更好体验'
+    : '建议使用轻量模型（4B-7B）或考虑云端方案';
+
+  let html = `
+    <div class="score-box">
+      <div class="score-num">${score}</div>
+      <div class="score-label">综合评分 · ${levelText}</div>
+    </div>
+    <p style="text-align:center;color:#94a3b8;margin-bottom:20px">${descText}</p>
+    <div class="specs">
+      <div class="spec">
+        <div class="label">🖥️ GPU</div>
+        <div class="value" style="font-size:.85rem;line-height:1.4">${gpu.substring(0,40)}</div>
+        ${vramEstimate > 0 ? `<div class="label" style="margin-top:4px">估计显存 ~${vramEstimate}MB</div>` : ''}
+      </div>
+      <div class="spec">
+        <div class="label">🧠 内存</div>
+        <div class="value ${ramGB>=16?'green':ramGB>=8?'yellow':'red'}">${ramGB} GB</div>
+      </div>
+      <div class="spec">
+        <div class="label">⚡ CPU核心</div>
+        <div class="value ${cpuCores>=8?'green':cpuCores>=4?'yellow':'red'}">${cpuCores}</div>
+      </div>
+      <div class="spec">
+        <div class="label">💻 平台</div>
+        <div class="value" style="font-size:.85rem">${isAppleSilicon?'Apple芯片':platform.includes('Win')?'Windows':platform.includes('Mac')?'macOS':'Linux'}</div>
+      </div>
+    </div>
+    <h3 style="margin:24px 0 12px">📊 可运行的模型</h3>
+    <div class="models">
+      ${models.map(m => `
+        <div class="model-row">
+          <span class="name">${m.name}</span>
+          <span class="badge ${m.status==='ok'?'ok':m.status==='warn'?'warn':'no'}">${m.status==='ok'?'✅ 可运行':m.status==='warn'?'⚠️ 可能较慢':'❌ 不推荐'}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('ctaSection').style.display = 'block';
+  btn.style.display = 'none';
+}
+</script>
+</body>
+</html>

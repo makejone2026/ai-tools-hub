@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI工具矩阵 | 免费开发者工具</title>
+<meta name="description" content="免费在线开发者工具：AI部署检测、文档转换、内网穿透检测。纯本地处理，数据安全。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.hero{text-align:center;padding:60px 20px 40px}
+.hero h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#38bdf8,#a78bfa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:#94a3b8;font-size:1.2rem;margin-top:12px}
+.grid{max-width:1000px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:20px;padding:32px;transition:all .3s;text-decoration:none;color:inherit;display:block}
+.card:hover{transform:translateY(-4px);border-color:#475569;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.card .icon{font-size:3rem;margin-bottom:16px}
+.card h3{font-size:1.3rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700}
+.badge-new{background:#7f1d1d;color:#f87171}
+.badge-hot{background:#78350f;color:#fbbf24}
+.card p{color:#94a3b8;font-size:.9rem;line-height:1.5}
+.card .tags{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.card .tag{padding:4px 10px;border-radius:20px;font-size:.75rem;background:#0f172a;color:#64748b}
+footer{text-align:center;color:#475569;font-size:.8rem;padding:40px 20px;border-top:1px solid #1e293b}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>🛠️ AI工具矩阵</h1>
+  <p>免费 · 纯本地处理 · 数据安全 · 零成本</p>
+</div>
+
+<div class="grid">
+  <a href="/ollama" class="card">
+    <div class="icon">🖥️</div>
+    <h3>AI部署检测 <span class="badge badge-hot">热门</span></h3>
+    <p>检测你的电脑能否本地运行DeepSeek、Llama等大模型。GPU/内存/CPU一键评分。</p>
+    <div class="tags"><span class="tag">Ollama</span><span class="tag">GPU检测</span><span class="tag">模型推荐</span></div>
+  </a>
+  
+  <a href="/markitdown" class="card">
+    <div class="icon">📄</div>
+    <h3>文档转Markdown <span class="badge badge-new">新</span></h3>
+    <p>Word/PDF/TXT一键转Markdown。支持拖拽上传，纯浏览器处理，数据绝不上传。</p>
+    <div class="tags"><span class="tag">Word→MD</span><span class="tag">PDF→MD</span><span class="tag">mammoth.js</span></div>
+  </a>
+  
+  <a href="/frp" class="card">
+    <div class="icon">🌐</div>
+    <h3>内网穿透检测</h3>
+    <p>检测公网IP、NAT类型、网络延迟。一键判断是否需要内网穿透，推荐最佳方案。</p>
+    <div class="tags"><span class="tag">frp</span><span class="tag">NAT检测</span><span class="tag">WebRTC</span></div>
+  </a>
+  
+  <div class="card" style="border:2px dashed #334155;background:transparent;text-align:center">
+    <div class="icon">🚧</div>
+    <h3>更多工具开发中</h3>
+    <p>Python环境检测 · 代码格式化 · API测试 · JSON转表格 · 更多...</p>
+    <div class="tags"><span class="tag">即将上线</span></div>
+  </div>
+</div>
+
+<footer>
+  © 2026 AI工具矩阵 · 全部工具纯客户端运行 · 零服务器成本 · 开源可审计<br>
+  需要定制开发？联系 28960559@qq.com
+</footer>
+</body>
+</html>
