@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Base64编解码 | 在线工具</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px}
+.container{max-width:800px;margin:0 auto}
+h1{font-size:1.8rem;text-align:center;margin:20px 0}
+h1 span{background:linear-gradient(135deg,#a78bfa,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;margin-bottom:20px}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.btn{padding:10px 20px;border-radius:8px;border:none;font-weight:600;cursor:pointer;font-size:.9rem}
+.purple{background:linear-gradient(135deg,#a78bfa,#ec4899);color:#fff}
+.gray{background:#334155;color:#e2e8f0}
+textarea{width:100%;min-height:200px;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:16px;color:#e2e8f0;font-family:monospace;font-size:.85rem;resize:vertical}
+.result{background:#0f172a;border-radius:10px;padding:20px;margin-top:12px;word-break:break-all;font-family:monospace;font-size:.85rem;min-height:80px}
+.cta-box{text-align:center;margin-top:16px}
+.cta-box form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.cta-box input[type=email]{padding:10px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;flex:1;min-width:180px}
+.btn:hover{filter:brightness(1.2)}
+</style></head>
+<body>
+<div class="container">
+<h1>🔐 Base64 <span>编解码</span></h1>
+<div class="card">
+  <div class="btns">
+    <button class="btn purple" onclick="encode()">🔒 编码 (文本→Base64)</button>
+    <button class="btn purple" onclick="decode()">🔓 解码 (Base64→文本)</button>
+    <button class="btn gray" onclick="swap()">🔄 交换上下</button>
+    <button class="btn gray" onclick="copyResult()">📋 复制结果</button>
+    <button class="btn gray" onclick="document.getElementById('input').value='';document.getElementById('output').textContent=''">🗑 清空</button>
+  </div>
+  <textarea id="input" placeholder="输入文本或Base64字符串..."></textarea>
+  <div class="result" id="output" style="color:#a78bfa">结果将显示在这里</div>
+</div>
+<div class="card cta-box">
+  <strong>💼 需要批量Base64处理？</strong>
+  <p style="color:#94a3b8;margin:6px 0">图片转Base64、批量编码解码 — 留下邮箱获取方案</p>
+  <form action="https://formsubmit.co/28960559@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="Base64批量处理需求">
+    <input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table">
+    <input type="email" name="email" placeholder="your@email.com" required>
+    <button class="btn purple" type="submit">获取方案 →</button>
+  </form>
+</div>
+</div>
+<script>
+const inp=document.getElementById('input'),out=document.getElementById('output');
+function encode(){try{out.textContent=btoa(unescape(encodeURIComponent(inp.value)))}catch(e){out.textContent='❌ 编码失败: '+e.message}}
+function decode(){try{out.textContent=decodeURIComponent(escape(atob(inp.value.trim())))}catch(e){out.textContent='❌ 解码失败(Base64格式错误)'}}
+function swap(){const t=inp.value;inp.value=out.textContent;out.textContent=t}
+function copyResult(){navigator.clipboard.writeText(out.textContent);out.textContent+=' ✅已复制'}
+</script></body></html>

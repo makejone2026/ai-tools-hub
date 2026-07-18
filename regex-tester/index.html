@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>正则测试 | RegEx在线工具</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{font-size:1.8rem;text-align:center;margin:20px 0}
+h1 span{background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;margin-bottom:20px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.row label{color:#94a3b8;font-size:.85rem;min-width:50px}
+input,textarea{background:#0f172a;border:1px solid #475569;border-radius:8px;padding:10px;color:#e2e8f0;font-family:monospace;font-size:.9rem}
+input{flex:1}
+textarea{width:100%;min-height:250px}
+.flags{display:flex;gap:6px;flex-wrap:wrap}
+.flag{padding:6px 14px;border-radius:20px;background:#334155;color:#94a3b8;cursor:pointer;font-size:.8rem;border:1px solid transparent}
+.flag.active{background:#7f1d1d;color:#f87171;border-color:#f87171}
+.match{background:#0f172a;border-radius:10px;padding:16px;margin-top:12px}
+.match-item{padding:6px 0;border-bottom:1px solid #1e293b;font-family:monospace;font-size:.85rem}
+.match-item:last-child{border:none}
+.match-item .pos{color:#f59e0b;margin-right:12px}
+.match-item .txt{color:#4ade80}
+.highlight{background:rgba(245,158,11,.3);border-radius:3px}
+.cta-box{text-align:center;margin-top:16px}
+.cta-box form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.cta-box input[type=email]{padding:10px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;flex:1;min-width:180px}
+.btn{padding:10px 20px;border-radius:8px;border:none;font-weight:600;cursor:pointer;font-size:.9rem;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff}
+.btn:hover{filter:brightness(1.2)}
+</style></head>
+<body>
+<div class="container">
+<h1>🔍 正则表达式 <span>测试工具</span></h1>
+<div class="card">
+  <div class="row">
+    <label>正则</label>
+    <input id="regex" value="(\\w+)@(\\w+\\.\\w+)" placeholder="输入正则表达式...">
+  </div>
+  <div class="flags">
+    <span class="flag active" data-flag="g" onclick="toggleFlag(this)">g 全局</span>
+    <span class="flag" data-flag="i" onclick="toggleFlag(this)">i 忽略大小写</span>
+    <span class="flag" data-flag="m" onclick="toggleFlag(this)">m 多行</span>
+    <span class="flag" data-flag="s" onclick="toggleFlag(this)">s 点匹配换行</span>
+  </div>
+  <textarea id="text" placeholder="输入测试文本...">联系我们: admin@example.com 和 support@company.org</textarea>
+  <div class="match" id="matches"></div>
+  <button class="btn" onclick="runRegex()" style="width:100%;margin-top:8px">🔍 测试匹配</button>
+</div>
+<div class="card cta-box">
+  <strong>💼 需要批量正则处理？</strong>
+  <p style="color:#94a3b8;margin:6px 0">日志提取、数据清洗、批量匹配 — 留下邮箱获取方案</p>
+  <form action="https://formsubmit.co/28960559@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="正则批量处理需求">
+    <input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table">
+    <input type="email" name="email" placeholder="your@email.com" required>
+    <button class="btn" type="submit">获取方案 →</button>
+  </form>
+</div>
+</div>
+<script>
+let flags='g';
+function toggleFlag(el){el.classList.toggle('active');flags=Array.from(document.querySelectorAll('.flag.active')).map(f=>f.dataset.flag).join('')}
+function runRegex(){
+  try{
+    const re=new RegExp(document.getElementById('regex').value,flags);
+    const text=document.getElementById('text').value;
+    const results=[...text.matchAll(re)];
+    const div=document.getElementById('matches');
+    if(results.length===0){div.innerHTML='<p style="color:#94a3b8">无匹配</p>';return}
+    if(flags.includes('g')){
+      div.innerHTML=results.map((m,i)=>`<div class="match-item"><span class="pos">#${i+1} [${m.index}]</span><span class="txt">${escapeHtml(m[0])}</span>${m.length>1?'<br>分组: '+m.slice(1).map(g=>escapeHtml(g||'')).join(', '):''}</div>`).join('');
+      }else{
+        const m=text.match(re);
+        div.innerHTML=m?`<div class="match-item"><span class="pos">✅ 匹配</span><span class="txt">${escapeHtml(m[0])}</span></div>`:'<p style="color:#94a3b8">无匹配</p>';
+      }
+  }catch(e){document.getElementById('matches').innerHTML='<p style="color:#f87171">❌ '+e.message+'</p>'}
+}
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+runRegex();
+</script></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>颜色转换 | HEX/RGB/HSL在线工具</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px}
+.container{max-width:800px;margin:0 auto}
+h1{font-size:1.8rem;text-align:center;margin:20px 0}
+h1 span{background:linear-gradient(135deg,#f472b6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;margin-bottom:20px}
+.picker-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+input[type=color]{width:80px;height:80px;border-radius:12px;border:2px solid #475569;cursor:pointer;background:none}
+input[type=text],input[type=number]{padding:12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-family:monospace;font-size:1rem;flex:1;min-width:100px}
+.input-group{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.input-group label{color:#94a3b8;min-width:60px;font-size:.85rem}
+.preview{height:120px;border-radius:12px;margin:16px 0;transition:.3s}
+.color-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-top:16px}
+.color-card{padding:12px;border-radius:10px;text-align:center;font-family:monospace;font-size:.8rem;cursor:pointer;transition:.2s}
+.color-card:hover{transform:scale(1.05)}
+.cta-box{text-align:center;margin-top:16px}
+.cta-box form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.cta-box input[type=email]{padding:10px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;flex:1;min-width:180px}
+.btn{padding:10px 20px;border-radius:8px;border:none;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#f472b6,#8b5cf6);color:#fff}
+</style></head>
+<body>
+<div class="container">
+<h1>🎨 <span>颜色转换器</span></h1>
+<div class="card">
+  <div class="picker-row">
+    <input type="color" id="picker" value="#38bdf8" oninput="fromPicker()">
+    <div>
+      <div class="input-group"><label>HEX</label><input type="text" id="hex" value="#38bdf8" oninput="fromHex()" placeholder="#RRGGBB"></div>
+      <div class="input-group"><label>RGB</label><input type="text" id="rgb" value="56,189,248" oninput="fromRgb()" placeholder="R,G,B"></div>
+      <div class="input-group"><label>HSL</label><input type="text" id="hsl" value="198,93%,60%" oninput="fromHsl()" placeholder="H,S%,L%"></div>
+    </div>
+    <button class="btn" onclick="copy('hex')">📋</button>
+    <button class="btn" onclick="randomColor()">🎲</button>
+  </div>
+  <div class="preview" id="preview" style="background:#38bdf8"></div>
+  <div class="color-cards">
+    <div class="color-card" style="background:#ef4444" onclick="set('#ef4444')">#ef4444<br>Red</div>
+    <div class="color-card" style="background:#f97316" onclick="set('#f97316')">#f97316<br>Orange</div>
+    <div class="color-card" style="background:#eab308" onclick="set('#eab308')">#eab308<br>Yellow</div>
+    <div class="color-card" style="background:#22c55e" onclick="set('#22c55e')">#22c55e<br>Green</div>
+    <div class="color-card" style="background:#06b6d4" onclick="set('#06b6d4')">#06b6d4<br>Cyan</div>
+    <div class="color-card" style="background:#3b82f6" onclick="set('#3b82f6')">#3b82f6<br>Blue</div>
+    <div class="color-card" style="background:#8b5cf6" onclick="set('#8b5cf6')">#8b5cf6<br>Purple</div>
+    <div class="color-card" style="background:#ec4899" onclick="set('#ec4899')">#ec4899<br>Pink</div>
+  </div>
+</div>
+<div class="card cta-box">
+  <strong>💼 需要批量颜色处理？</strong>
+  <p style="color:#94a3b8;margin:6px 0">设计系统配色、批量转换 — 留下邮箱获取方案</p>
+  <form action="https://formsubmit.co/28960559@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="颜色处理需求">
+    <input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table">
+    <input type="email" name="email" placeholder="your@email.com" required>
+    <button class="btn" type="submit">获取方案 →</button>
+  </form>
+</div>
+</div>
+<script>
+function set(h){document.getElementById('picker').value=h;fromPicker()}
+function fromPicker(){const h=document.getElementById('picker').value;document.getElementById('hex').value=h;document.getElementById('preview').style.background=h;updateRgbHsl(h)}
+function fromHex(){const v=document.getElementById('hex').value;if(/^#[0-9a-fA-F]{6}$/.test(v)){document.getElementById('picker').value=v;document.getElementById('preview').style.background=v;updateRgbHsl(v)}}
+function fromRgb(){const p=document.getElementById('rgb').value.split(',').map(Number);if(p.length===3&&p.every(n=>n>=0&&n<=255)){const h='#'+p.map(n=>n.toString(16).padStart(2,'0')).join('');document.getElementById('picker').value=h;document.getElementById('hex').value=h;document.getElementById('preview').style.background=h;updateHsl(p)}}
+function fromHsl(){const m=document.getElementById('hsl').value.match(/(\d+)[^\d]+(\d+)%[^\d]+(\d+)%/);if(m){const [h,s,l]=[+m[1],+m[2]/100,+m[3]/100];const rgb=hsl2rgb(h,s,l);const hex='#'+rgb.map(n=>Math.round(n).toString(16).padStart(2,'0')).join('');document.getElementById('picker').value=hex;document.getElementById('hex').value=hex;document.getElementById('preview').style.background=hex}}
+function updateRgbHsl(hex){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);document.getElementById('rgb').value=`${r},${g},${b}`;const [h,s,l]=rgb2hsl(r,g,b);document.getElementById('hsl').value=`${h},${Math.round(s*100)}%,${Math.round(l*100)}%`}
+function rgb2hsl(r,g,b){r/=255;g/=255;b/=255;const M=Math.max(r,g,b),m=Math.min(r,g,b),l=(M+m)/2;if(M===m)return[0,0,l*100];const s=l>.5?(M-m)/(2-M-m):(M-m)/(M+m);let h;if(M===r)h=((g-b)/(M-m))%6;else if(M===g)h=(b-r)/(M-m)+2;else h=(r-g)/(M-m)+4;return[Math.round(h*60),(s*100).toFixed(0),(l*100).toFixed(0)]}
+function hsl2rgb(h,s,l){h/=360;let r,g,b;if(s===0)r=g=b=l;else{const q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;r=hue(p,q,h+1/3);g=hue(p,q,h);b=hue(p,q,h-1/3)}return[r*255,g*255,b*255]}
+function hue(p,q,t){if(t<0)t++;if(t>1)t--;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p}
+function randomColor(){const h='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');set(h)}
+function copy(id){const v=document.getElementById(id).value;navigator.clipboard.writeText(v);alert('✅ 已复制: '+v)}
+</script></body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>时间戳转换 | Unix时间戳在线工具</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;padding:20px}
+.container{max-width:700px;margin:0 auto}
+h1{font-size:1.8rem;text-align:center;margin:20px 0}
+h1 span{background:linear-gradient(135deg,#06b6d4,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;margin-bottom:20px}
+.row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.row label{color:#94a3b8;font-size:.85rem;min-width:80px}
+input,select{padding:12px 16px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:1rem;flex:1;min-width:180px}
+.btn{padding:12px 24px;border-radius:8px;border:none;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#06b6d4,#3b82f6);color:#fff;font-size:.95rem;width:100%}
+.result{background:#0f172a;border-radius:10px;padding:20px;margin-top:16px}
+.result .item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1e293b}
+.result .item:last-child{border:none}
+.result .val{color:#06b6d4;font-weight:600;font-family:monospace}
+.now-btn{margin-bottom:16px}
+.cta-box{text-align:center;margin-top:20px}
+.cta-box form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.cta-box input[type=email]{padding:12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;flex:1;min-width:200px}
+</style></head>
+<body>
+<div class="container">
+<h1>⏰ <span>时间戳转换</span></h1>
+<div class="card">
+  <button class="btn now-btn" onclick="useNow()">🕐 使用当前时间</button>
+  <div class="row">
+    <label>秒级 (s)</label>
+    <input type="number" id="tsSec" placeholder="1700000000">
+  </div>
+  <div class="row">
+    <label>毫秒 (ms)</label>
+    <input type="number" id="tsMs" placeholder="1700000000000">
+  </div>
+  <button class="btn" onclick="convertTs()">🔄 转换为日期</button>
+  <div class="result" id="tsResult">
+    <div class="item"><span>📅 北京时间</span><span class="val" id="bjTime">—</span></div>
+    <div class="item"><span>🌍 UTC时间</span><span class="val" id="utcTime">—</span></div>
+    <div class="item"><span>📆 ISO 8601</span><span class="val" id="isoTime">—</span></div>
+    <div class="item"><span>📊 星期</span><span class="val" id="weekday">—</span></div>
+  </div>
+</div>
+<div class="card">
+  <h3 style="margin-bottom:12px">📅 日期 → 时间戳</h3>
+  <div class="row">
+    <input type="datetime-local" id="dateInput">
+  </div>
+  <button class="btn" onclick="convertDate()">🔄 转为时间戳</button>
+  <div class="result" id="dtResult" style="display:none">
+    <div class="item"><span>秒级时间戳</span><span class="val" id="secTs">—</span></div>
+    <div class="item"><span>毫秒时间戳</span><span class="val" id="msTs">—</span></div>
+  </div>
+</div>
+<div class="card cta-box">
+  <strong>💼 需要批量时间戳转换？</strong>
+  <p style="color:#94a3b8;margin:8px 0">日志分析、数据清洗、API对接 — 留下邮箱获取方案</p>
+  <form action="https://formsubmit.co/28960559@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="时间戳批量转换需求">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="email" name="email" placeholder="your@email.com" required>
+    <button class="btn" type="submit">获取方案 →</button>
+  </form>
+</div>
+</div>
+<script>
+function useNow(){const n=Math.floor(Date.now()/1000);document.getElementById('tsSec').value=n;document.getElementById('tsMs').value=n*1000;convertTs()}
+function fmt(d){return d.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})}
+function convertTs(){
+  let ts=parseInt(document.getElementById('tsSec').value)||parseInt(document.getElementById('tsMs').value/1000)||parseInt(document.getElementById('tsMs').value);
+  if(!ts){document.getElementById('tsSec').value=Math.floor(Date.now()/1000);ts=Math.floor(Date.now()/1000)}
+  const d=new Date(ts*1000);
+  document.getElementById('bjTime').textContent=fmt(d);
+  document.getElementById('utcTime').textContent=d.toUTCString();
+  document.getElementById('isoTime').textContent=d.toISOString();
+  document.getElementById('weekday').textContent=['日','一','二','三','四','五','六'][d.getDay()]+'曜日';
+}
+function convertDate(){
+  const v=document.getElementById('dateInput').value;
+  if(!v)return;
+  const d=new Date(v);const s=Math.floor(d.getTime()/1000);
+  document.getElementById('secTs').textContent=s;
+  document.getElementById('msTs').textContent=s*1000;
+  document.getElementById('dtResult').style.display='block';
+}
+useNow();
+</script></body></html>
