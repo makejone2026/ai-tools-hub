@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/</loc><priority>1.0</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/ollama-checker/</loc><priority>0.8</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/markitdown-converter/</loc><priority>0.8</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/qrcode-generator/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/json-formatter/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/base64-tool/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/url-tool/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/timestamp-converter/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/regex-tester/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/color-converter/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/markdown-preview/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/frp-checker/</loc><priority>0.7</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/medusa-service/</loc><priority>0.9</priority></url>
+  <url><loc>https://makejone2026.github.io/ai-tools-hub/ghost-service/</loc><priority>0.9</priority></url>
+</urlset>
