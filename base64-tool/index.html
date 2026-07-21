@@ -51,4 +51,5 @@ function encode(){try{out.textContent=btoa(unescape(encodeURIComponent(inp.value
 function decode(){try{out.textContent=decodeURIComponent(escape(atob(inp.value.trim())))}catch(e){out.textContent='❌ 解码失败(Base64格式错误)'}}
 function swap(){const t=inp.value;inp.value=out.textContent;out.textContent=t}
 function copyResult(){navigator.clipboard.writeText(out.textContent);out.textContent+=' ✅已复制'}
-</script></body></html>
+</script><script src="/tracker.js"></script>
+</body></html>

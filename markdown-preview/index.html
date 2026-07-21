@@ -105,4 +105,5 @@ function insertAtStart(prefix){const s=editor.selectionStart;const t=editor.valu
 function copyMd(){navigator.clipboard.writeText(editor.value);alert('✅ 已复制')}
 function downloadMd(){const b=new Blob([editor.value],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='document.md';a.click()}
 renderMd();
-</script></body></html>
+</script><script src="/tracker.js"></script>
+</body></html>
