@@ -72,5 +72,7 @@ function hsl2rgb(h,s,l){h/=360;let r,g,b;if(s===0)r=g=b=l;else{const q=l<.5?l*(1
 function hue(p,q,t){if(t<0)t++;if(t>1)t--;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p}
 function randomColor(){const h='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');set(h)}
 function copy(id){const v=document.getElementById(id).value;navigator.clipboard.writeText(v);alert('✅ 已复制: '+v)}
-</script><script src="/tracker.js"></script>
+</script>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"3Qd6JSMoQS0lqNMW",ck:"3Qd6JSMoQS0lqNMW"})</script>
 </body></html>
